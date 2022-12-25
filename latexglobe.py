@@ -1,3 +1,5 @@
+from math import sin, cos, tan, atan, atan2, acos, asin, pi, sqrt
+
 ####
 # Create LaTeX pstricks code to draw a globe, with meridians and parallels
 # pstricks may work only if you use 'dvips' on the .dvi file, and then 'ps2pdf' on the .ps file.
@@ -47,7 +49,6 @@ ALL = VISIBLE + INVISIBLE
 #   test()
 
 
-from math import sin, cos, tan, atan, atan2, acos, asin, pi, sqrt
 
 # Function to test output and to give some examples of usage
 def test():
@@ -58,14 +59,14 @@ def test():
     for x in range(8):
         az = -30 + x * 30
         for y in range(9):
-          ax = -30 + y * 30
-          (tilt, rot) = tiltRotOxOz(ax, az)
-          print('\\rput(%d, %d){ %s ax=%d, az=%d' % (x*3, y*3, '%', ax, az))
-          print('\\rput[t](0,%.1f){\\tiny ox=%d,oz=%d }' % (-1.1, ax, az))
-          print('\\rput[t](0,%.1f){\\tiny t=%.2f,r=%.2f }' % (-1.3, tilt, rot))
-          print('% tilt rot:', tilt, rot)
-          globe(tilt, rot, hollow=True, longitude_start = 10)
-          print('}')
+            ax = -30 + y * 30
+            (tilt, rot) = tiltRotOxOz(ax, az)
+            print('\\rput(%d, %d){ %s ax=%d, az=%d' % (x*3, y*3, '%', ax, az))
+            print('\\rput[t](0,%.1f){\\tiny ox=%d,oz=%d }' % (-1.1, ax, az))
+            print('\\rput[t](0,%.1f){\\tiny t=%.2f,r=%.2f }' % (-1.3, tilt, rot))
+            print('% tilt rot:', tilt, rot)
+            globe(tilt, rot, hollow=True, longitude_start = 10)
+            print('}')
     pictureEnd()
 
     print('\\newpage')
@@ -490,7 +491,7 @@ def meridian(longitude=0, tilt=DEFAULT_TILT, rot=DEFAULT_ROT, radius=1, show=ALL
     if (longitude % 180 == 0 or tilt % 180 == 90):
         semiMinorAxis = 0
     if comment == '':
-        comment = 'meridian %d°' % longitude
+        comment = f'meridian {longitude}°'
 
     if show == ALL  or  semiMinorAxis == semiMajorAxis  or  semiMinorAxis == 0:
         if semiMinorAxis == 0:
